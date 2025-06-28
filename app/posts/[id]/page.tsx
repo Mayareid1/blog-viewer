@@ -4,11 +4,13 @@ import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';
 import PostCard from '../../components/PostCard';
 
-export default async function Page({
-  params,
-}: {
-  params: { id: string };
-}) {
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function Page({ params }: PageProps) {
   try {
     const post = await fetchPostById(params.id);
     const allPosts = await fetchPosts();
