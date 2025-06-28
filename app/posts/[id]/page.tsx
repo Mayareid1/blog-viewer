@@ -4,13 +4,24 @@ import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';
 import PostCard from '../../components/PostCard';
 
-type PageProps = {
-  params: {
-    id: string;
-  };
+import type { Metadata, ResolvingMetadata } from 'next';
+
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default async function Page({ params }: PageProps) {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // You can optionally add metadata generation here
+  return {
+    title: `Post ${params.id}`,
+  };
+}
+
+export default async function PostPage({ params }: Props) {
   try {
     const post = await fetchPostById(params.id);
     const allPosts = await fetchPosts();
