@@ -4,11 +4,7 @@ import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';
 import PostCard from '../../components/PostCard';
 
-interface PostDetailPageProps {
-  params: {
-    id: string;
-  };
-}
+
 
 export default async function PostDetailPage({ params }: { params: { id: string } }) {
   try {
