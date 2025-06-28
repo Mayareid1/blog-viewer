@@ -1,27 +1,32 @@
+// app/posts/[id]/page.tsx
 import { fetchPostById, fetchPosts } from '../../Services/api';
 import Error from '../../components/Error';
 import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';
 import PostCard from '../../components/PostCard';
 
-export default async function Page({ params }: { params: { id: string } }) {
+interface Props {
+  params: { id: string };
+}
+
+export default async function Page({ params }: Props) {
   try {
     const post = await fetchPostById(params.id);
     const allPosts = await fetchPosts();
 
     const relatedPosts = allPosts
-      .filter(p => p.id.toString() !== params.id)
+      .filter((p) => p.id.toString() !== params.id)
       .sort(() => 0.5 - Math.random())
       .slice(0, 2);
 
     return (
       <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 animate-enter">
         <div className="max-w-3xl mx-auto">
-          <Link 
-            href="/posts" 
+          <Link
+            href="/posts"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-8 transition-colors duration-200 group"
           >
-            <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform duration-300"/>
+            <FiArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
             Back to articles
           </Link>
 
@@ -44,9 +49,9 @@ export default async function Page({ params }: { params: { id: string } }) {
             <div className="p-6 sm:p-8 text-gray-700">
               <div className="prose max-w-none !text-gray-700">
                 {post.body.split('\n').map((paragraph, i) => (
-                  <p 
-                    key={i} 
-                    className="mb-4 text-gray-700 animate-fadeIn" 
+                  <p
+                    key={i}
+                    className="mb-4 text-gray-700 animate-fadeIn"
                     style={{ animationDelay: `${i * 0.05}s` }}
                   >
                     {paragraph}
@@ -62,9 +67,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
               {relatedPosts.length > 0 ? (
-                relatedPosts.map((post) => (
-                  <PostCard key={post.id} post={post} />
-                ))
+                relatedPosts.map((post) => <PostCard key={post.id} post={post} />)
               ) : (
                 <p className="text-gray-500">No related articles found</p>
               )}
