@@ -1,6 +1,4 @@
 import { fetchPostById, fetchPosts } from '../../Services/api';
-import { Suspense } from 'react';
-import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';

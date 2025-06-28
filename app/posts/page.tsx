@@ -1,9 +1,6 @@
 import { fetchPosts } from '../Services/api';
 import PostCard from '../components/PostCard';
-import { Suspense } from 'react';
-import Loading from '../components/Loading';
-import Error from '../components/Error';
-import PageTransition from '../components/PageTransition';
+
 
 export default async function PostsPage() {
   const posts = await fetchPosts();
