@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';
 import PostCard from '../../components/PostCard';
 
-import type { Metadata, ResolvingMetadata } from 'next';
+import type { Metadata} from 'next';
 
 type Props = {
   params: { id: string };
@@ -12,10 +12,8 @@ type Props = {
 };
 
 export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
+  { params }: Props
 ): Promise<Metadata> {
-  // You can optionally add metadata generation here
   return {
     title: `Post ${params.id}`,
   };
