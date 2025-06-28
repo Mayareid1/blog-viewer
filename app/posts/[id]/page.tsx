@@ -10,7 +10,7 @@ interface PostDetailPageProps {
   };
 }
 
-export default async function PostDetailPage({ params }: PostDetailPageProps) {
+export default async function PostDetailPage({ params }: { params: { id: string } }) {
   try {
     const post = await fetchPostById(params.id);
     const allPosts = await fetchPosts();
