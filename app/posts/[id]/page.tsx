@@ -1,15 +1,14 @@
-// app/posts/[id]/page.tsx
 import { fetchPostById, fetchPosts } from '../../Services/api';
 import Error from '../../components/Error';
 import Link from 'next/link';
 import { FiArrowLeft, FiUser, FiCalendar } from 'react-icons/fi';
 import PostCard from '../../components/PostCard';
 
-interface Props {
+export default async function Page({
+  params,
+}: {
   params: { id: string };
-}
-
-export default async function Page({ params }: Props) {
+}) {
   try {
     const post = await fetchPostById(params.id);
     const allPosts = await fetchPosts();
@@ -32,9 +31,7 @@ export default async function Page({ params }: Props) {
 
           <article className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-12 text-gray-700">
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-6 text-white">
-              <h1 className="text-3xl sm:text-4xl font-bold mb-2 animate-slideUp">
-                {post.title}
-              </h1>
+              <h1 className="text-3xl sm:text-4xl font-bold mb-2 animate-slideUp">{post.title}</h1>
               <div className="flex items-center space-x-6 text-sm opacity-90">
                 <span className="flex items-center">
                   <FiUser className="mr-1.5" />
@@ -46,6 +43,7 @@ export default async function Page({ params }: Props) {
                 </span>
               </div>
             </div>
+
             <div className="p-6 sm:p-8 text-gray-700">
               <div className="prose max-w-none !text-gray-700">
                 {post.body.split('\n').map((paragraph, i) => (
